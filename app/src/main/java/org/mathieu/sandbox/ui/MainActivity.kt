@@ -21,6 +21,7 @@ import androidx.navigation.navArgument
 import org.mathieu.sandbox.ui.core.theme.SandboxTheme
 import org.mathieu.sandbox.ui.screens.characterdetails.CharacterDetailsScreen
 import org.mathieu.sandbox.ui.screens.characters.CharactersScreen
+import org.mathieu.sandbox.ui.screens.episodedetails.EpisodeDetails
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,8 +66,20 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
 
-
                         }
+
+                        composable(
+                            route = "EpisodeDetails/{episodeId}",
+                            arguments = listOf(navArgument("episodeId") { type = NavType.IntType })
+                        ) { navBackStackEntry ->
+                            val episodeId: Int? = navBackStackEntry.arguments?.getInt("episodeId")
+                            if (episodeId != null) {
+                                EpisodeDetails(episodeId = episodeId)
+                            } else {
+                                // Handle error or pop back stack
+                            }
+                        }
+
 
                     }
                 }
